@@ -83,7 +83,9 @@
                 </div>
 
                 <p><b>This site aims to help track your daily food journal with the Weight Watchers SmartPoints system.</b></p>
+                @if (!Auth::check())
                 <p><b>Users must be logged in to access their food journal.</b></p>
+                @endif
             </div>
         </div>
     </body>
