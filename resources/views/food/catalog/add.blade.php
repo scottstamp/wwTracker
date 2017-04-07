@@ -1,7 +1,7 @@
 @extends('layouts.none')
 
 @section('content')
-<form class="form-horizontal" role="form" id="food-store" method="POST" action="{{ url('/food/store') }}">
+<form class="form-horizontal" role="form" id="food-store" method="POST" action="{{ url('/food/diary/store') }}">
     {{ csrf_field() }}
 
     <div class="form-group{{ $errors->has('username') ? ' has-error' : '' }}">
@@ -139,9 +139,7 @@
     }
 
     $("#food-store").find(":input").change(function() {
-        const points = calculate();
-        if (points !== 0)
-            $("#points").val(calculate());
+        $("#points").val(calculate());
     });
 
     $("#name").autocomplete({

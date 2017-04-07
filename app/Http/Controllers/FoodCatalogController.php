@@ -1,22 +1,25 @@
 <?php
 namespace App\Http\Controllers;
 
-use App\FoodDiary;
-use Carbon\Carbon;
+use App\FoodCatalog;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
 
-class FoodDiaryController extends Controller {
-    public function __construct()
-    {
-        $this->middleware('auth');
+class FoodCatalogController
+{
+    public function index() {
+        $foodList = FoodCatalog::where('user_id', '=', Auth::id())->get();
+        return view('food.catalog.index', ['food_list' => $foodList]);
+    }
+
+    public function add() {
+        return view('food.catalog.add');
     }
 
     public function store(Request $request) {
         $data = $request->all();
         $data['user_id'] = Auth::id();
 
-        $foodItem = new FoodDiary;
+        $foodItem = new FoodCatalog;
         $foodItem->fill($data);
         $foodItem->save();
 
@@ -24,29 +27,17 @@ class FoodDiaryController extends Controller {
     }
 
     public function remove($id) {
-        $foodItem = FoodDiary::where('id', '=', $id)
+        $foodItem = FoodCatalog::where('id', '=', $id)
             ->where('user_id', '=', Auth::id());
-        if (!is_null($foodItem->first())) $foodItem->delete();
+
+        if (!is_null($foodItem)) $foodItem->delete();
 
         return redirect()->back();
     }
 
-    public function index($days = 0) {
-        $now = Carbon::now();
-        $date = $now->subDay($days);
-        $foodList = FoodDiary::whereDate('eaten_at', $date->format('Y-m-d'))->where('user_id', '=', Auth::id())->get();
-        return view('food.diary.index', ['date' => $date, 'food_list' => $foodList, 'days' => $days]);
-    }
-
-    public function add() {
-        $now = Carbon::now('America/st_johns')->toW3cString();
-        $now = substr($now,0, -6);
-        return view('food.diary.add', ['time' => $now]);
-    }
-
     public function autocomplete(Request $request) {
         $name = $request->get('term');
-        $foodItems = FoodDiary::where('name', 'like', '%'.$name.'%')
+        $foodItems = FoodCatalog::where('name', 'like', '%'.$name.'%')
             ->where('user_id', '=', Auth::id())
             ->select('name', 'calories', 'sugar', 'saturated_fat', 'protein', 'points')
             ->distinct()
