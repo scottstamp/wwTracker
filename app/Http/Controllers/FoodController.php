@@ -35,9 +35,9 @@ class FoodController extends Controller {
 
     public function index($days = 0) {
         $now = Carbon::now();
-        $date = $now->subDay($days)->format('Y-m-d');
+        $date = $now->subDay($days);
         $food = Food::whereDate('eaten_at', $date)->where('user_id', '=', Auth::id())->get();
-        return view('food.index', ['today' => $date, 'food_list' => $food, 'days' => $days]);
+        return view('food.index', ['date' => $date, 'food_list' => $food, 'days' => $days]);
     }
 
     public function add() {

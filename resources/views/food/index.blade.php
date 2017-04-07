@@ -6,7 +6,12 @@
             <div class="col-md-10 col-md-offset-1">
                 <div class="panel panel-default">
                     <div class="panel-heading clearfix">
-                        <h4 class="panel-title pull-left" style="padding-top: 10px">Food ({{ $today }})</h4>
+                        <h4 class="panel-title pull-left" style="padding-top: 10px">
+                            Food ({{ $date->format('l, F jS') }})
+                            @if ($days != 0)
+                                <span class="small"><a href="/food">Go to Today</a></span>
+                            @endif
+                        </h4>
                         <a href="/food/add" data-remote="false" data-toggle="modal" data-target="#addModal" class="btn btn-default pull-right">
                             Add Food
                         </a>
@@ -33,7 +38,12 @@
                                     <td>{{ $food->protein }}</td>
                                     <td>{{ $food->points }}</td>
                                     <td>{{ Carbon\Carbon::parse($food->eaten_at)->format('h:i A') }}</td>
-                                    <td><a href="/food/remove/{{ $food->id }}" data-remote="false" data-toggle="modal" data-target="#removeModal">Remove</a></td>
+                                    <td>
+                                        <a href="/food/remove/{{ $food->id }}" data-remote="false" data-toggle="modal"
+                                           data-target="#removeModal" data-backdrop="static" data-keyboard="false">
+                                            Remove
+                                        </a>
+                                    </td>
                                 </tr>
                             @endforeach
                         </table>
@@ -44,13 +54,13 @@
                         <ul class="pagination" style="margin-top: 0">
                             <li>
                                 <a href="/food/{{ $days + 1 }}" aria-label="Previous">
-                                    <span aria-hidden="true">&laquo;</span>
+                                    <span aria-hidden="true">&laquo; Previous Day</span>
                                 </a>
                             </li>
-                            <li><a href="#">{{ $today }}</a></li>
+                            {{--<li><a href="#">{{ $today }}</a></li>--}}
                             <li>
                                 <a href="/food/{{ $days - 1 }}" aria-label="Previous">
-                                    <span aria-hidden="true">&raquo;</span>
+                                    <span aria-hidden="true">Next Day &raquo;</span>
                                 </a>
                             </li>
                         </ul>
@@ -64,7 +74,9 @@
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
                     <h4 class="modal-title" id="addModalLabel">Add Food</h4>
                 </div>
                 <div id="addBody" class="modal-body"></div>
