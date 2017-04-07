@@ -33,11 +33,28 @@
                                     <td>{{ $food->protein }}</td>
                                     <td>{{ $food->points }}</td>
                                     <td>{{ Carbon\Carbon::parse($food->eaten_at)->format('h:i A') }}</td>
-                                    <td><a href="/food/remove/{{ $food->id }}">Remove</a></td>
+                                    <td><a href="/food/remove/{{ $food->id }}" data-remote="false" data-toggle="modal" data-target="#removeModal">Remove</a></td>
                                 </tr>
                             @endforeach
                         </table>
                     </div>
+                </div>
+                <div class="panel-footer" style="padding: 10px 0">
+                    <nav aria-label="Page navigation">
+                        <ul class="pagination" style="margin-top: 0">
+                            <li>
+                                <a href="/food/{{ $days + 1 }}" aria-label="Previous">
+                                    <span aria-hidden="true">&laquo;</span>
+                                </a>
+                            </li>
+                            <li><a href="#">{{ $today }}</a></li>
+                            <li>
+                                <a href="/food/{{ $days - 1 }}" aria-label="Previous">
+                                    <span aria-hidden="true">&raquo;</span>
+                                </a>
+                            </li>
+                        </ul>
+                    </nav>
                 </div>
             </div>
         </div>
@@ -49,6 +66,22 @@
                 <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
                     <h4 class="modal-title" id="addModalLabel">Add Food</h4>
+                </div>
+                <div id="addBody" class="modal-body"></div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade" id="removeModal" tabindex="-1" role="dialog" aria-labelledby="removeModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title" id="removeModalLabel">Confirm Remove</h4>
+                    <div id="removeBody" class="modal-body">
+                        <p>Are you sure you wish to remove this entry?</p>
+                        <a id="removeLink" class="btn btn-warning pull-right">Remove</a>
+                    </div>
                 </div>
                 <div class="modal-body"></div>
             </div>

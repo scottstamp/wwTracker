@@ -17,9 +17,10 @@ Route::get('/', function () {
 
 Route::get('/home', 'HomeController@index');
 
-Route::get('/food/{days?}', 'FoodController@index')->where(['days' => '[0-9]+']);
+Route::get('/food/{days?}', 'FoodController@index')->where(['days' => '^\-?[0-9]+']);
 Route::get('/food/add', 'FoodController@add');
 Route::get('/food/autocomplete', 'FoodController@autocomplete');
+Route::get('/food/remove/{id}', 'FoodController@remove')->where(['id' => '[0-9]+']);
 Route::post('/food/store', 'FoodController@store');
 
 Auth::routes();

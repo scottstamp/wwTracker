@@ -113,31 +113,28 @@
 
 <script>
     function calculate() {
-        var cal = $("#calories").val();
-        var sfat = $("#saturated_fat").val();
+        var calories = $("#calories").val();
+        var saturated_fat = $("#saturated_fat").val();
         var sugar = $("#sugar").val();
         var protein = $("#protein").val();
-        if (cal == null || cal == "") {
+        if (calories === null || calories === "") {
             //alert("You must enter a number for calories");
-        } else if (isNaN(cal)) {
+        } else if (isNaN(calories)) {
             //alert("You must enter a valid number for calories");
-        } else if (sfat == null || sfat == "") {
+        } else if (saturated_fat === null || saturated_fat === "") {
             //alert("You must enter a number for saturated fat");
-        } else if (isNaN(sfat)) {
+        } else if (isNaN(saturated_fat)) {
             //alert("You must enter a valid number for saturated fat");
-        } else if (sugar == null || sugar == "") {
+        } else if (sugar === null || sugar === "") {
             //alert("You must enter a number for sugar");
         } else if (isNaN(sugar)) {
             //alert("You must enter a valid number for sugar");
-        } else if (protein == null || protein == "") {
+        } else if (protein === null || protein === "") {
             //alert("You must enter a number for protein");
         } else if (isNaN(protein)) {
             //alert("You must enter a valid number for protein");
         } else {
-            //var doc = document.MyFormSmartPts;
-            var smartpts = Math.round((cal * 0.0305) + (sfat * .275) + (sugar * .12) - (protein * .098));
-            //doc.result.value = ((smartpts) + " pts");
-            return smartpts;
+            return Math.round((calories * 0.0305) + (saturated_fat * .275) + (sugar * .12) - (protein * .098));
         }
     }
 

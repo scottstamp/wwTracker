@@ -5,7 +5,7 @@ use App\Food;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Input;
+use Illuminate\Support\Facades\DB;
 
 class FoodController extends Controller {
     public function __construct()
@@ -21,15 +21,23 @@ class FoodController extends Controller {
         $food->fill($data);
         $food->save();
 
-        return redirect("/food");
+        return redirect()->back();
+    }
+
+    public function remove($id) {
+        $food = DB::table('food')
+            ->where('id', '=', $id)
+            ->where('user_id', '=', Auth::id());
+        if (!is_null($food->first())) $food->delete();
+
+        return redirect()->back();
     }
 
     public function index($days = 0) {
         $now = Carbon::now();
         $date = $now->subDay($days)->format('Y-m-d');
         $food = Food::whereDate('eaten_at', $date)->where('user_id', '=', Auth::id())->get();
-//        dd($food);
-        return view('food.index', ['today' => $date, 'food_list' => $food]);
+        return view('food.index', ['today' => $date, 'food_list' => $food, 'days' => $days]);
     }
 
     public function add() {
@@ -45,7 +53,6 @@ class FoodController extends Controller {
             ->select('name', 'calories', 'sugar', 'saturated_fat', 'protein', 'points')
             ->distinct()
             ->get();
-            //->get('name', 'calories', 'sugar', 'saturated_fat', 'protein', 'points');
 
         foreach ($food as $item) {
             $results[] = [
@@ -60,7 +67,5 @@ class FoodController extends Controller {
         }
 
         return response()->json($results);
-
-        //return response()->json(["suggestions" => $food]);
     }
 }

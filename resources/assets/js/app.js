@@ -21,8 +21,8 @@ const app = new Vue({
 });
 
 Date.prototype.stdTimezoneOffset = function() {
-    var jan = new Date(this.getFullYear(), 0, 1);
-    var jul = new Date(this.getFullYear(), 6, 1);
+    const jan = new Date(this.getFullYear(), 0, 1);
+    const jul = new Date(this.getFullYear(), 6, 1);
     return Math.max(jan.getTimezoneOffset(), jul.getTimezoneOffset());
 };
 
@@ -31,9 +31,9 @@ Date.prototype.dst = function() {
 };
 
 Date.prototype.toLocalTime = function() {
-    var newDate = new Date(this.getTime()+this.getTimezoneOffset()*60*1000);
-    var offset = this.getTimezoneOffset() / 60;
-    var hours = this.getHours();
+    const newDate = new Date(this.getTime()+this.getTimezoneOffset()*60*1000);
+    let offset = this.getTimezoneOffset() / 60;
+    const hours = this.getHours();
 
     if (this.dst()) offset--;
 
@@ -43,6 +43,17 @@ Date.prototype.toLocalTime = function() {
 };
 
 $("#addModal").on("show.bs.modal", function(e) {
-    var link = $(e.relatedTarget);
-    $(this).find(".modal-body").load(link.attr("href"));
+    const link = $(e.relatedTarget);
+    $(this).find("#addBody").load(link.attr("href"));
 });
+
+$('a[href^="/food/remove"]').on('click', function(e) {
+    e.preventDefault();
+    $("#removeLink").attr('href', $(this).attr('href'));
+});
+
+$("#removeModal").on("show.bs.model", function(e) {
+    const link = $(e.relatedTarget);
+    $("#removeLink").attr("href", link.attr("href"));
+});
+
