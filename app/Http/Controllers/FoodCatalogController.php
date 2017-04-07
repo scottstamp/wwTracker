@@ -2,10 +2,11 @@
 namespace App\Http\Controllers;
 
 use App\FoodCatalog;
+use App\FoodDiary;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
-class FoodCatalogController
-{
+class FoodCatalogController extends Controller {
     public function index() {
         $foodList = FoodCatalog::where('user_id', '=', Auth::id())->get();
         return view('food.catalog.index', ['food_list' => $foodList]);
@@ -31,6 +32,29 @@ class FoodCatalogController
             ->where('user_id', '=', Auth::id());
 
         if (!is_null($foodItem)) $foodItem->delete();
+
+        return redirect()->back();
+    }
+
+    public function import() {
+        $foodItems = FoodDiary::where('user_id', '=', Auth::id())
+            ->select('id', 'user_id', 'name', 'calories', 'sugar', 'saturated_fat', 'protein', 'points')
+            ->distinct()
+            ->get();
+
+        foreach ($foodItems as $item) {
+            $result = [
+                'user_id' => $item->user_id,
+                'name' => $item->name,
+                'calories' => $item->calories,
+                'sugar' => $item->sugar,
+                'saturated_fat' => $item->saturated_fat,
+                'protein' => $item->protein,
+                'points' => $item->points
+            ];
+
+            FoodCatalog::updateOrCreate($result);
+        }
 
         return redirect()->back();
     }

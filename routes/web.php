@@ -12,15 +12,25 @@
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    if (Auth::check())
+        return redirect('/food');
+    else
+        return view('welcome');
 });
 
 Route::get('/home', 'HomeController@index');
 
 Route::get('/food/{days?}', 'FoodDiaryController@index')->where(['days' => '^\-?[0-9]+']);
 Route::get('/food/add', 'FoodDiaryController@add');
-Route::get('/food/autocomplete', 'FoodDiaryController@autocomplete');
+//Route::get('/food/autocomplete', 'FoodDiaryController@autocomplete');
 Route::get('/food/remove/{id}', 'FoodDiaryController@remove')->where(['id' => '[0-9]+']);
 Route::post('/food/store', 'FoodDiaryController@store');
+
+Route::get('/food/catalog', 'FoodCatalogController@index');
+Route::get('/food/catalog/add', 'FoodCatalogController@add');
+Route::get('/food/catalog/import', 'FoodCatalogController@import');
+Route::get('/food/catalog/autocomplete', 'FoodCatalogController@autocomplete');
+Route::get('/food/catalog/remove/{id}', 'FoodCatalogController@remove')->where(['id' => '[0-9]+']);
+Route::post('/food/catalog/store', 'FoodCatalogController@store');
 
 Auth::routes();

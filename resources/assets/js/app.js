@@ -47,7 +47,7 @@ $("#addModal").on("show.bs.modal", function(e) {
     $(this).find("#addBody").load(link.attr("href"));
 });
 
-$('a[href^="/food/remove"]').on('click', function(e) {
+$('a[href^="/food/remove"], a[href^="/food/catalog/remove"]').on('click', function(e) {
     e.preventDefault();
     $("#removeLink").attr('href', $(this).attr('href'));
 });

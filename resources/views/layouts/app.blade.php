@@ -60,6 +60,7 @@
                                 </a>
                                 <ul class="dropdown-menu" rule="menu">
                                     <li><a href="/food">Food Diary</a></li>
+                                    <li><a href="/food/catalog">Food Catalog</a></li>
                                 </ul>
                             </li>
                             <li class="dropdown">

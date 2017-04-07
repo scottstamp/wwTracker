@@ -88,20 +88,6 @@
         </div>
     </div>
 
-    <div class="form-group{{ $errors->has('eaten_at') ? ' has-error' : '' }}">
-        <label for="eaten_at" class="col-md-4 control-label">Time</label>
-
-        <div class="col-md-6">
-            <input id="eaten_at" type="datetime-local" class="form-control" name="eaten_at" value="{{ $time }}" required autofocus>
-
-            @if ($errors->has('eaten_at'))
-                <span class="help-block">
-                <strong>{{ $errors->first('eaten_at') }}</strong>
-            </span>
-            @endif
-        </div>
-    </div>
-
     <div class="form-group">
         <div class="col-md-8 col-md-offset-4">
             <button type="submit" class="btn btn-primary">

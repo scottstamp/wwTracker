@@ -76,7 +76,7 @@
 var bind = __webpack_require__(9);
 
 /*global toString:true*/
-// broke the js
+
 // utils is a library of generic helper functions non-specific to axios
 
 var toString = Object.prototype.toString;
@@ -12641,7 +12641,7 @@ $("#addModal").on("show.bs.modal", function (e) {
     $(this).find("#addBody").load(link.attr("href"));
 });
 
-$('a[href^="/food/remove"]').on('click', function (e) {
+$('a[href^="/food/remove"], a[href^="/food/catalog/remove"]').on('click', function (e) {
     e.preventDefault();
     $("#removeLink").attr('href', $(this).attr('href'));
 });
