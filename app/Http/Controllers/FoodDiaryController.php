@@ -1,13 +1,13 @@
 <?php
 namespace App\Http\Controllers;
 
-use App\Food;
+use App\FoodDiary;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 
-class FoodController extends Controller {
+class FoodDiaryController extends Controller {
     public function __construct()
     {
         $this->middleware('auth');
@@ -17,7 +17,7 @@ class FoodController extends Controller {
         $data = $request->all();
         $data['user_id'] = Auth::id();
 
-        $food = new Food;
+        $food = new FoodDiary;
         $food->fill($data);
         $food->save();
 
@@ -25,8 +25,7 @@ class FoodController extends Controller {
     }
 
     public function remove($id) {
-        $food = DB::table('food')
-            ->where('id', '=', $id)
+        $food = FoodDiary::where('id', '=', $id)
             ->where('user_id', '=', Auth::id());
         if (!is_null($food->first())) $food->delete();
 
@@ -36,19 +35,19 @@ class FoodController extends Controller {
     public function index($days = 0) {
         $now = Carbon::now();
         $date = $now->subDay($days);
-        $food = Food::whereDate('eaten_at', $date->format('Y-m-d'))->where('user_id', '=', Auth::id())->get();
-        return view('food.index', ['date' => $date, 'food_list' => $food, 'days' => $days]);
+        $food = FoodDiary::whereDate('eaten_at', $date->format('Y-m-d'))->where('user_id', '=', Auth::id())->get();
+        return view('food.diary.index', ['date' => $date, 'food_list' => $food, 'days' => $days]);
     }
 
     public function add() {
         $now = Carbon::now('America/st_johns')->toW3cString();
         $now = substr($now,0, -6);
-        return view('food.add', ['time' => $now]);
+        return view('food.diary.add', ['time' => $now]);
     }
 
     public function autocomplete(Request $request) {
         $name = $request->get('term');
-        $food = Food::where('name', 'like', '%'.$name.'%')
+        $food = FoodDiary::where('name', 'like', '%'.$name.'%')
             ->where('user_id', '=', Auth::id())
             ->select('name', 'calories', 'sugar', 'saturated_fat', 'protein', 'points')
             ->distinct()

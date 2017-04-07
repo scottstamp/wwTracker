@@ -14,7 +14,7 @@ class Food extends Migration
     public function up()
     {
         // create food table
-        Schema::create('food', function(Blueprint $table) {
+        Schema::create('food_diary', function(Blueprint $table) {
             $table->increments('id');
             $table->integer('user_id')->unsigned();
             $table->foreign('user_id')
