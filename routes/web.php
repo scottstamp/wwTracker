@@ -33,4 +33,7 @@ Route::get('/food/catalog/autocomplete', 'FoodCatalogController@autocomplete');
 Route::get('/food/catalog/remove/{id}', 'FoodCatalogController@remove')->where(['id' => '[0-9]+']);
 Route::post('/food/catalog/store', 'FoodCatalogController@store');
 
+Route::get('/user/settings', 'UserSettingsController@index')->name('user/settings');
+Route::post('/user/store', 'UserSettingsController@store')->name('user/store');
+
 Auth::routes();

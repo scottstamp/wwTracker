@@ -6,14 +6,6 @@
             <div class="col-md-10 col-md-offset-1">
                 <div class="panel panel-default">
                     <div class="panel-heading clearfix">
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-md-10 col-md-offset-1">
-                <div class="panel panel-default">
-                    <div class="panel-heading clearfix">
                         <h4 class="panel-title pull-left" style="padding-top: 10px">
                             Food Catalog
                         </h4>

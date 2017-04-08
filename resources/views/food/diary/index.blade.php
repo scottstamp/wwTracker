@@ -6,6 +6,20 @@
             <div class="col-md-10 col-md-offset-1">
                 <div class="panel panel-default">
                     <div class="panel-heading clearfix">
+                        <h4 class="panel-title pull-left">
+                            Overview
+                        </h4>
+                    </div>
+                    <div class="panel-body">
+                        Total Points: {{ $pointsCount }} / Daily Limit: {{ $dailyLimit }} / Points Left: {{ $dailyLimit - $pointsCount }}
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-10 col-md-offset-1">
+                <div class="panel panel-default">
+                    <div class="panel-heading clearfix">
                         <h4 class="panel-title pull-left" style="padding-top: 10px">
                             Food ({{ $date->format('l, F jS') }})
                             @if ($days != 0)
@@ -28,7 +42,7 @@
                                 <th>Time</th>
                                 <th></th>
                             </thead>
-                            @foreach ($food_list as $food)
+                            @foreach ($foodList as $food)
                                 <tr>
                                     <td>{{ $food->name }}</td>
                                     <td>{{ $food->calories }}</td>

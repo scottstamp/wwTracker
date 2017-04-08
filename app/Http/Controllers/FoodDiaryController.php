@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 use App\FoodCatalog;
 use App\FoodDiary;
 use Carbon\Carbon;
+use Grimthorr\LaravelUserSettings\Setting;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -43,8 +44,11 @@ class FoodDiaryController extends Controller {
         $date = $now->subDay($days);
         $foodList = FoodDiary::whereDate('eaten_at', $date->format('Y-m-d'))->where('user_id', '=', Auth::id());
         $pointsCount = $foodList->sum('points');
+        $dailyLimit = setting('dailyLimit', 30);
+        
         $foodList = $foodList->get();
-        return view('food.diary.index', ['date' => $date, 'food_list' => $foodList, 'days' => $days, 'pointsCount' => $pointsCount]);
+
+        return view('food.diary.index', compact('date', 'foodList', 'days', 'pointsCount', 'dailyLimit'));
     }
 
     public function add() {
