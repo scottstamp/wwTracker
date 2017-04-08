@@ -1,6 +1,7 @@
 <?php
 namespace App\Http\Controllers;
 
+use App\FoodCatalog;
 use App\FoodDiary;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
@@ -20,6 +21,12 @@ class FoodDiaryController extends Controller {
         $foodItem->fill($data);
         $foodItem->save();
 
+        $result = $foodItem->attributesToArray();
+        unset($result["eaten_at"]);
+        unset($result["id"]);
+
+        FoodCatalog::updateOrCreate($result);
+
         return redirect()->back();
     }
 
@@ -32,14 +39,16 @@ class FoodDiaryController extends Controller {
     }
 
     public function index($days = 0) {
-        $now = Carbon::now();
+        $now = Carbon::now('America/St_Johns');
         $date = $now->subDay($days);
-        $foodList = FoodDiary::whereDate('eaten_at', $date->format('Y-m-d'))->where('user_id', '=', Auth::id())->get();
-        return view('food.diary.index', ['date' => $date, 'food_list' => $foodList, 'days' => $days]);
+        $foodList = FoodDiary::whereDate('eaten_at', $date->format('Y-m-d'))->where('user_id', '=', Auth::id());
+        $pointsCount = $foodList->sum('points');
+        $foodList = $foodList->get();
+        return view('food.diary.index', ['date' => $date, 'food_list' => $foodList, 'days' => $days, 'pointsCount' => $pointsCount]);
     }
 
     public function add() {
-        $now = Carbon::now('America/st_johns')->toW3cString();
+        $now = Carbon::now('America/St_Johns')->toW3cString();
         $now = substr($now,0, -6);
         return view('food.diary.add', ['time' => $now]);
     }

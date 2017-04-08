@@ -13,6 +13,7 @@ const { mix } = require('laravel-mix');
 
 mix.js('resources/assets/js/app.js', 'public/js')
    .sass('resources/assets/sass/app.scss', 'public/css')
+   .sass('resources/assets/sass/darkly.scss', 'public/css')
    .styles([
        'node_modules/jquery-ui/themes/base/core.css',
        'node_modules/jquery-ui/themes/base/menu.css',

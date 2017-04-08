@@ -145,7 +145,7 @@
     });
 
     $("#name").autocomplete({
-        source: "/food/autocomplete",
+        source: "/food/catalog/autocomplete",
         minLength: 3,
         select: function(event, ui) {
             console.log(ui);

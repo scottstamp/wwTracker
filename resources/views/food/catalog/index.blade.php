@@ -6,13 +6,21 @@
             <div class="col-md-10 col-md-offset-1">
                 <div class="panel panel-default">
                     <div class="panel-heading clearfix">
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-10 col-md-offset-1">
+                <div class="panel panel-default">
+                    <div class="panel-heading clearfix">
                         <h4 class="panel-title pull-left" style="padding-top: 10px">
                             Food Catalog
                         </h4>
-                        <a href="/food/catalog/add" data-remote="false" data-toggle="modal" data-target="#addModal" class="btn btn-default pull-right">
-                            Add Food
+                        <a href="/food/catalog/add" data-remote="false" data-toggle="modal" data-target="#addModal" class="btn btn-primary pull-right">
+                            Add Food to Catalog
                         </a>
-                        <a href="/food/catalog/import" class="btn btn-default pull-right" style="margin-right:10px">
+                        <a href="/food/catalog/import" class="btn btn-primary pull-right" style="margin-right:10px">
                             Import from Diary
                         </a>
                     </div>
@@ -27,7 +35,7 @@
                                 <th>Points</th>
                                 <th></th>
                             </thead>
-                            @foreach ($food_list as $food)
+                            @foreach ($foodList as $food)
                                 <tr>
                                     <td>{{ $food->name }}</td>
                                     <td>{{ $food->calories }}</td>

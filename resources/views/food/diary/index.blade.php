@@ -9,13 +9,12 @@
                         <h4 class="panel-title pull-left" style="padding-top: 10px">
                             Food ({{ $date->format('l, F jS') }})
                             @if ($days != 0)
-                                <span class="small"><a href="/food">Go to Today</a></span>
+                                <span class="small"><a href="/food" style="color: #3097D1">Go to Today &raquo;</a></span>
                             @endif
                         </h4>
-                        <a href="/food/add" data-remote="false" data-toggle="modal" data-target="#addModal" class="btn btn-default pull-right">
-                            Add Food
+                        <a href="/food/add" data-remote="false" data-toggle="modal" data-target="#addModal" class="btn btn-primary pull-right">
+                            Add Food to Diary
                         </a>
-                        {{--<a href="/food/add" class="btn btn-primary pull-right">Add</a>--}}
                     </div>
                     <div class="panel-body">
                         <table class="table">

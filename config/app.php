@@ -179,6 +179,9 @@ return [
 
         // Barry's IDE Helper thingy
         Barryvdh\LaravelIdeHelper\IdeHelperServiceProvider::class,
+
+        // Grimthorr/laravel-user-settings
+        Grimthorr\LaravelUserSettings\ServiceProvider::class,
     ],
 
     /*
@@ -227,6 +230,7 @@ return [
         'URL' => Illuminate\Support\Facades\URL::class,
         'Validator' => Illuminate\Support\Facades\Validator::class,
         'View' => Illuminate\Support\Facades\View::class,
+        'Setting' => Grimthorr\LaravelUserSettings\Facade::class,
 
     ],
 

@@ -8,8 +8,11 @@ use Illuminate\Support\Facades\Auth;
 
 class FoodCatalogController extends Controller {
     public function index() {
-        $foodList = FoodCatalog::where('user_id', '=', Auth::id())->get();
-        return view('food.catalog.index', ['food_list' => $foodList]);
+        $foodList = FoodCatalog::where('user_id', '=', Auth::id())
+            ->orderBy('name', 'asc')
+            ->get();
+
+        return view('food.catalog.index', compact('foodList'));
     }
 
     public function add() {
