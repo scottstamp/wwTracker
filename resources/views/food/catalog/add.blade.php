@@ -125,7 +125,9 @@
     }
 
     $("#food-store").find(":input").change(function() {
-        $("#points").val(calculate());
+        const points = calculate();
+        if (points !== 0)
+            $("#points").val(calculate());
     });
 
     $("#name").autocomplete({
