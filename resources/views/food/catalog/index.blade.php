@@ -10,30 +10,31 @@
                             Food Catalog
                         </h4>
                         <a href="/food/catalog/add" data-remote="false" data-toggle="modal" data-target="#addModal" class="btn btn-primary pull-right">
-                            Add Food to Catalog
+			    <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
+                            <span class="hidden-xs">Add Food to Catalog</span>
                         </a>
-                        <a href="/food/catalog/import" class="btn btn-primary pull-right" style="margin-right:10px">
+                        <!--a href="/food/catalog/import" class="btn btn-primary pull-right" style="margin-right:10px">
                             Import from Diary
-                        </a>
+                        </a-->
                     </div>
                     <div class="panel-body">
                         <table class="table">
                             <thead>
                                 <th>Name</th>
-                                <th>Calories</th>
-                                <th>Sugar</th>
-                                <th>Fat</th>
-                                <th>Protein</th>
+                                <th class="hidden-xs">Calories</th>
+                                <th class="hidden-xs">Sugar</th>
+                                <th class="hidden-xs">Fat</th>
+                                <th class="hidden-xs">Protein</th>
                                 <th>Points</th>
                                 <th></th>
                             </thead>
                             @foreach ($foodList as $food)
                                 <tr>
                                     <td>{{ $food->name }}</td>
-                                    <td>{{ $food->calories }}</td>
-                                    <td>{{ $food->sugar }}</td>
-                                    <td>{{ $food->saturated_fat }}</td>
-                                    <td>{{ $food->protein }}</td>
+                                    <td class="hidden-xs">{{ $food->calories }}</td>
+                                    <td class="hidden-xs">{{ $food->sugar }}</td>
+                                    <td class="hidden-xs">{{ $food->saturated_fat }}</td>
+                                    <td class="hidden-xs">{{ $food->protein }}</td>
                                     <td>{{ $food->points }}</td>
                                     <td>
                                         <a href="/food/catalog/remove/{{ $food->id }}" data-remote="false" data-toggle="modal"

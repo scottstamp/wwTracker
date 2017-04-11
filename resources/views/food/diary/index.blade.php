@@ -27,17 +27,18 @@
                             @endif
                         </h4>
                         <a href="/food/add" data-remote="false" data-toggle="modal" data-target="#addModal" class="btn btn-primary pull-right">
-                            Add Food to Diary
+			    <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
+                            <!--Add Food to Diary-->
                         </a>
                     </div>
                     <div class="panel-body">
                         <table class="table">
                             <thead>
                                 <th>Name</th>
-                                <th>Calories</th>
-                                <th>Sugar</th>
-                                <th>Fat</th>
-                                <th>Protein</th>
+                                <th class="hidden-xs">Calories</th>
+                                <th class="hidden-xs">Sugar</th>
+                                <th class="hidden-xs">Fat</th>
+                                <th class="hidden-xs">Protein</th>
                                 <th>Points</th>
                                 <th>Time</th>
                                 <th></th>
@@ -45,10 +46,10 @@
                             @foreach ($foodList as $food)
                                 <tr>
                                     <td>{{ $food->name }}</td>
-                                    <td>{{ $food->calories }}</td>
-                                    <td>{{ $food->sugar }}</td>
-                                    <td>{{ $food->saturated_fat }}</td>
-                                    <td>{{ $food->protein }}</td>
+                                    <td class="hidden-xs">{{ $food->calories }}</td>
+                                    <td class="hidden-xs">{{ $food->sugar }}</td>
+                                    <td class="hidden-xs">{{ $food->saturated_fat }}</td>
+                                    <td class="hidden-xs">{{ $food->protein }}</td>
                                     <td>{{ $food->points }}</td>
                                     <td>{{ Carbon\Carbon::parse($food->eaten_at)->format('h:i A') }}</td>
                                     <td>
